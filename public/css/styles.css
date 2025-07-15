@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* === Base Mobile-First Styles === */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -15,78 +14,52 @@ body {
   line-height: 1.6;
 }
 
-header, footer {
-  background-color: #003366;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+/* Main promo box container */
+.promo-box {
+  position: relative;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline-block;
-  margin: 0 1rem;
-}
-
-.hero {
-  text-align: center;
-  padding: 1rem;
-}
-
-.hero img {
+/* Image on top */
+.promo-image {
   width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
+  display: block;
 }
 
-.hero-text {
-  margin-top: 1rem;
-}
-
-.featured {
-  padding: 1rem;
-}
-
-.vehicle-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.vehicle-card img {
-  width: 100%;
-  border-radius: 6px;
-}
-
-.vehicle-card {
+/* Colored box with text and button */
+.text-box {
+  background-color: #30abdb;
+  color: #ffffff;
+  padding: 1.5rem;
   text-align: center;
 }
 
-/* === Media Query for Larger Screens (Desktop, Tablet) === */
-@media screen and (min-width: 768px) {
-  .vehicle-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.text-box h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
 
-  .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    padding: 2rem;
-  }
+.text-box p {
+  margin: 0.5rem 0 1.2rem;
+}
 
-  .hero img {
-    max-width: 50%;
-    height: auto;
-  }
+/* Button style */
+.own-button {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .hero-text {
-    max-width: 45%;
-  }
+.own-button:hover {
+  background-color: #e6b800;
 }
