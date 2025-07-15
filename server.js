@@ -17,7 +17,7 @@ const staticRoutes = require("./routes/static"); // Assuming you have routes/sta
  ***********************/
 
 // Serve static files from the public directory
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
@@ -42,9 +42,9 @@ app.get("/", function (req, res) {
  * Start the Server
  ***********************/
 
-const port = process.env.PORT || 5500;
+const port = 3000; // or any other unused port like 3030 or 4000
 const host = process.env.HOST || "localhost";
 
 app.listen(port, () => {
-  console.log(`App listening at http://${host}:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
