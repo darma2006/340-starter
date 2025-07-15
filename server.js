@@ -17,6 +17,7 @@ const static = require("./routes/static")
  *************************/
 
 //Index route
+app.use(express.static('public'));
 app.get("/", function(req, res){
   res.render("index", {title: "Home"})
 })
