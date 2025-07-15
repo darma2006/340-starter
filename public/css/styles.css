@@ -4,3 +4,89 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* === Base Mobile-First Styles === */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222;
+  background: #fff;
+  line-height: 1.6;
+}
+
+header, footer {
+  background-color: #003366;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 1rem;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.hero-text {
+  margin-top: 1rem;
+}
+
+.featured {
+  padding: 1rem;
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.vehicle-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.vehicle-card {
+  text-align: center;
+}
+
+/* === Media Query for Larger Screens (Desktop, Tablet) === */
+@media screen and (min-width: 768px) {
+  .vehicle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 2rem;
+  }
+
+  .hero img {
+    max-width: 50%;
+    height: auto;
+  }
+
+  .hero-text {
+    max-width: 45%;
+  }
+}
