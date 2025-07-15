@@ -1,44 +1,50 @@
-/* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- *******************************************/
-/* ***********************
- * Require Statements
- *************************/
+/******************************************
+ * server.js - Main server file
+ ******************************************/
+
+const path = require('path');
+
+// Require Statements
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const env = require("dotenv").config();
 
-const env = require("dotenv").config()
-const app = express()
-const static = require("./routes/static")
+const app = express();
+const staticRoutes = require("./routes/static"); // Assuming you have routes/static.js
 
-/* ***********************
- * View Engine and Templates
- *************************/
+/***********************
+ * Middleware
+ ***********************/
 
-//Index route
-app.use(express.static('public'));
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
+// Serve static files from the public directory
+app.use(express.static("public"));
 
-app.set("view engine", "ejs")
+// Set EJS as the view engine
+app.set("view engine", "ejs");
 app.use(expressLayouts);
-app.set("layout", "./layouts/layout") // not at views root
-app.use(static)
 
-app.use(static)
+// Specify layout file (if not in views root)
+app.set("layout", "./layouts/layout");
 
-/* ***********************
- * Local Server Information
- * Values from .env (environment) file
- *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+// Use static routes (placed after view engine setup)
+app.use(staticRoutes);
 
-/* ***********************
- * Log statement to confirm server operation
- *************************/
+/***********************
+ * Routes
+ ***********************/
+
+// Home page route
+app.get("/", function (req, res) {
+  res.render("index", { title: "Home" });
+});
+
+/***********************
+ * Start the Server
+ ***********************/
+
+const port = process.env.PORT || 5500;
+const host = process.env.HOST || "localhost";
+
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
+  console.log(`App listening at http://${host}:${port}`);
+});
