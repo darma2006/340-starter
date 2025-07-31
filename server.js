@@ -2,6 +2,7 @@
  * server.js - Main server file
  ******************************************/
 
+const baseController = require("./controllers/baseController")
 const path = require('path');
 
 // Require Statements
@@ -34,9 +35,7 @@ app.use(staticRoutes);
  ***********************/
 
 // Home page route
-app.get("/", function (req, res) {
-  res.render("index", { title: "Home" });
-});
+app.get("/", baseController.buildHome)
 
 /***********************
  * Start the Server
