@@ -1,10 +1,11 @@
-<%- include("../partials/head") %>
-<%- include("../partials/header") %>
-<%- include("../partials/nav") %>
-
-<main>
+<% if (title) { %>
   <h1><%= title %></h1>
-  <%- grid %>
-</main>
+<% } else { %>
+  <% res.redirect('/') %>
+<% } %>
 
-<%- include("../partials/footer") %>
+<!-- Message block for future use -->
+<%# messages() %>
+
+<!-- Inventory items display -->
+<%- grid %>
