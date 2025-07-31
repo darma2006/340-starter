@@ -1,7 +1,7 @@
 /******************************************
  * server.js - Main server file
  ******************************************/
-
+const inventoryRoute = require("./routes/inventoryRoute")
 const baseController = require("./controllers/baseController")
 const path = require('path');
 
@@ -43,6 +43,10 @@ app.get("/", baseController.buildHome)
 
 const port = 3000; // or any other unused port like 3030 or 4000
 const host = process.env.HOST || "localhost";
+
+// Inventory routes
+app.use("/inv", inventoryRoute)
+
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
