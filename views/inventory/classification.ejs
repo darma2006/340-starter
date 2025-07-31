@@ -1,11 +1,12 @@
+<% /* Content Heading - Display title if it exists, otherwise redirect home */ %>
 <% if (title) { %>
   <h1><%= title %></h1>
-<% } else { %>
-  <% res.redirect('/') %>
-<% } %>
+<% } else {
+  res.redirect('/')
+} %>
 
-<!-- Message block for future use -->
+<% /* Message Block - for future use, currently commented out */ %>
 <%# messages() %>
 
-<!-- Inventory items display -->
+<% /* Inventory Items Display - Render the HTML grid passed from the controller */ %>
 <%- grid %>
