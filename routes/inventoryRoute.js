@@ -1,3 +1,6 @@
+router.get("/detail/:inv_id", invController.buildByInventoryId);
+
+
 // Needed Resources 
 const express = require("express")
 const router = new express.Router() 

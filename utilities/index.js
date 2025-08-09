@@ -1,7 +1,9 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
 
-/* Build navigation unordered list HTML */
+/* ******************************
+ * Build navigation unordered list HTML
+ * ****************************** */
 Util.getNav = async function(req, res, next) {
   let data = await invModel.getClassifications()
   let list = "<ul>"
@@ -13,12 +15,9 @@ Util.getNav = async function(req, res, next) {
   return list
 }
 
-module.exports = Util
-
-
-/* **************************************
-* Build the classification view HTML
-* ************************************ */
+/* ******************************
+ * Build the classification view HTML
+ * ****************************** */
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
@@ -48,3 +47,29 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* ******************************
+ * Build the vehicle detail HTML
+ * ****************************** */
+Util.buildVehicleDetailHTML = function(vehicle) {
+  const price = vehicle.inv_price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const miles = vehicle.inv_miles.toLocaleString("en-US");
+
+  return `
+    <div class="vehicle-detail-container">
+      <img class="vehicle-detail-image" src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+      <div class="vehicle-detail-info">
+        <h2>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>
+        <p><strong>Price:</strong> ${price}</p>
+        <p><strong>Mileage:</strong> ${miles} miles</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+      </div>
+    </div>
+  `
+}
+
+module.exports = Util
