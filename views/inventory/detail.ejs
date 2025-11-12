@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main class="container">
+  <% if (title) { %>
+    <h1 class="page-title"><%= title %></h1>
+  <% } %>
+
+  <section id="vehicle-detail-wrap">
+    <!-- unescaped HTML from utilities (contains image + info) -->
+    <%- detail %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
