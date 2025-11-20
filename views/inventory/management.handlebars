@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{title}}</title>
+</head>
+<body>
+  {{{nav}}}
+
+  <h1>Inventory Management</h1>
+
+  {{#if message}}
+    <p class="message">{{message}}</p>
+  {{/if}}
+
+  <ul>
+    <li><a href="/inv/add-classification">Add New Classification</a></li>
+    <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+  </ul>
+</body>
+</html>

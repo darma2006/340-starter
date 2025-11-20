@@ -1,4 +1,6 @@
-/******* Change Box Model ***************/
+/******************************************
+ * GLOBAL RESET & BASE STYLES
+ ******************************************/
 *,
 *:before,
 *:after {
@@ -9,15 +11,42 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #222;
-  background-color: #fff;
 
+  /* Full screen checkerboard background */
   background-image: url("/images/site/checkerboard.jpg");
   background-repeat: repeat;
-  background-size: contain;
-  background-position: center;
+  background-size: auto;
+  background-color: #fff;
+
+  padding: 40px 0; /* space around the centered box */
 }
 
+/******************************************
+ * MAIN WHITE WRAPPER (The big box with cyan border)
+ ******************************************/
+#wrapper {
+  width: 80%;
+  max-width: 900px;
 
+  margin: 0 auto; /* center the box */
+  background-color: white;
+
+  border: 5px solid #3ac7f0; /* cyan border like screenshot */
+  padding: 20px;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/******************************************
+ * HEADER, NAV, FOOTER inside wrapper
+ ******************************************/
+header, nav, footer {
+  background-color: #fff;
+}
+
+/******************************************
+ * MAIN CONTENT AREA
+ ******************************************/
 main {
   max-width: 800px;
   margin: 0 auto;
@@ -28,6 +57,9 @@ h1, h2 {
   color: #003366;
 }
 
+/******************************************
+ * HOME PAGE (Delorean Hero)
+ ******************************************/
 .hero {
   display: flex;
   flex-direction: column;
@@ -89,12 +121,12 @@ h1, h2 {
 
 .upgrade p {
   text-align: center;
-  margin: 0.5rem 0 0;
+  margin-top: 0.5rem;
   font-weight: bold;
 }
 
 .reviews ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
@@ -102,7 +134,10 @@ h1, h2 {
   margin: 0.5rem 0;
 }
 
-/******* Desktop Layout ***************/
+
+/******************************************
+ * DESKTOP RESPONSIVE LAYOUT
+ ******************************************/
 @media (min-width: 768px) {
   .hero {
     flex-direction: row;
@@ -134,6 +169,9 @@ h1, h2 {
 }
 
 
+/******************************************
+ * VEHICLE DETAIL PAGE
+ ******************************************/
 .vehicle-detail {
   display: flex;
   gap: 2rem;
@@ -150,7 +188,6 @@ h1, h2 {
 .vehicle-image img {
   width: 100%;
   height: auto;
-  display: block;
   border-radius: 6px;
 }
 
@@ -171,4 +208,39 @@ h1, h2 {
 .v-details {
   list-style: none;
   padding: 0;
+}
+
+
+/******************************************
+ * LOGIN + REGISTER FORMS
+ ******************************************/
+.login-form {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+.login-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.form-container {
+  max-width: 450px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 }

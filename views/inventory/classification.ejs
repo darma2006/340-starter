@@ -1,0 +1,12 @@
+<%- include("../partials/header") %>
+<%- include("../partials/nav") %>
+
+<h1><%= title %></h1>
+
+<% if (message) { %>
+  <p class="notice"><%= message %></p>
+<% } %>
+
+<%- classificationGrid %>
+
+<%- include("../partials/footer") %>

@@ -1,15 +1,21 @@
-<%- include('../partials/head') %>
-<%- include('../partials/header') %>
+<%- include('../partials/header', { title }) %>
 
-<main class="container">
-  <% if (title) { %>
-    <h1 class="page-title"><%= title %></h1>
-  <% } %>
+<main class="vehicle-detail">
+  <h1><%= title %></h1>
 
-  <section id="vehicle-detail-wrap">
-    <!-- unescaped HTML from utilities (contains image + info) -->
-    <%- detail %>
-  </section>
+  <div class="detail-wrapper">
+    <div class="vehicle-image">
+      <img src="<%= detailView.image %>" alt="<%= detailView.title %>">
+    </div>
+
+    <div class="vehicle-info">
+      <p><strong>Price:</strong> $<%= detailView.price %></p>
+      <p><strong>Year:</strong> <%= detailView.year %></p>
+      <p><strong>Color:</strong> <%= detailView.color %></p>
+      <p><strong>Miles:</strong> <%= detailView.miles %></p>
+      <p><%= detailView.description %></p>
+    </div>
+  </div>
 </main>
 
 <%- include('../partials/footer') %>

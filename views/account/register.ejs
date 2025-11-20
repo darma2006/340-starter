@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <main>
+    <h1><%= title %></h1>
+
+    <!-- Flash messages -->
+    <% if (errors) { %>
+      <div class="notice">
+        <%= errors %>
+      </div>
+    <% } %>
+
+
+    <div class="form-container">
+        <h1><%= title %></h1>
+
+        <form action="/account/register" method="post">
+        <!-- inputs -->
+        <input type="text" name="account_firstname" id="accountFirstname">First name
+        <input id="account_firstname" name="account_firstname" type="text" required value="<%= locals.account_firstname %>">
+
+        <label for="account_lastname">Last name</label>
+        <input id="account_lastname" name="account_lastname" type="text" required value="<%= locals.account_lastname %>">
+
+        <label for="account_email">Email</label>
+        <input id="account_email" name="account_email" type="email" required value="<%= locals.account_email %>">
+
+        <label for="account_password">Password</label>
+        <input id="account_password" name="account_password" type="password" required value="<%= locals.account_password %>">
+
+        <button type="submit">Register</button>
+    </form>
+
+    </div>
+
+  </main>
+</body>
+</html>
