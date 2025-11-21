@@ -1,7 +1,6 @@
 /* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- ******************************************/
+ * Primary server file for the application
+ *******************************************/
 
 /* ***********************
  * Require Statements
@@ -32,9 +31,9 @@ app.use(session({
   name: "sessionId",
 }))
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+// Accept form POST data
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static("public"))
 
@@ -44,10 +43,6 @@ app.use(function(req, res, next) {
   res.locals.messages = require("express-messages")(req, res)
   next()
 })
-
-// Accept form POST data
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 /* ***********************
  * View Engine
@@ -61,13 +56,8 @@ app.set("layout", "./layouts/layout")
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-// Inventory routes
 app.use("/inv", inventoryRoute)
-
-// Account routes
 app.use("/account", accountRoute)
-
-// Static files
 app.use(staticRoutes)
 
 /* ***********************
@@ -93,14 +83,14 @@ app.use(async (err, req, res, next) => {
 })
 
 /* ***********************
- * Local Server Info
+ * Server Info for Render
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT || 3000
+const host = process.env.HOST || "0.0.0.0"
 
 /* ***********************
  * Start Server
  *************************/
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
+app.listen(port, host, () => {
+  console.log(`App listening on http://${host}:${port}`)
 })
