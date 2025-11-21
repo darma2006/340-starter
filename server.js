@@ -102,5 +102,5 @@ const host = process.env.HOST
  * Start Server
  *************************/
 app.listen(port, () => {
-  console.log(`App listening on ${host}:${port}`)
+  console.log(`App listening on port ${port}`)
 })
