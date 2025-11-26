@@ -3,21 +3,45 @@ const router = new express.Router()
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
 const regValidate = require("../utilities/account-validation")
+const checkJWT = utilities.checkJWTToken
 
-// Route to show the login view (GET /account/login)
+// ========================================
+// Account Management (protected route)
+// ========================================
+router.get(
+  "/",
+  checkJWT,
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildAccountManagement)
+)
+
+// ========================================
+// Logout
+// ========================================
+router.get("/logout", accountController.logout)
+
+// ========================================
+// Login / Register Views
+// ========================================
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
-
-// Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
-router.post('/register', utilities.handleErrors(accountController.registerAccount))
+// ========================================
+// Registration
+// ========================================
+router.post(
+  "/register",
+  utilities.handleErrors(accountController.registerAccount)
+)
 
-// Process the login attempt
+// ========================================
+// Login Processing
+// ========================================
 router.post(
   "/login",
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
 )
 
 module.exports = router

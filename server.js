@@ -16,33 +16,45 @@ const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require("./database/")
+const cookieParser = require("cookie-parser")
+const flash = require("connect-flash")
 
 /* ***********************
  * Middleware
  *************************/
+
+// Session must be FIRST
 app.use(session({
   store: new (require("connect-pg-simple")(session))({
     createTableIfMissing: true,
     pool,
   }),
   secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   name: "sessionId",
 }))
+
+// Flash AFTER session
+app.use(flash())
+
+// Make flash messages available in all views
+app.use((req, res, next) => {
+  res.locals.messages = req.flash("notice") || []
+  next()
+})
+
+app.use(cookieParser())
 
 // Accept form POST data
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Public folder
 app.use(express.static("public"))
 
-// Flash messages
-app.use(require("connect-flash")())
-app.use(function(req, res, next) {
-  res.locals.messages = require("express-messages")(req, res)
-  next()
-})
+// JWT check
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine
@@ -55,7 +67,6 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
-
 app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
 app.use(staticRoutes)

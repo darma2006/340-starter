@@ -12,7 +12,17 @@
 <a href="/inv/add-inventory">Add New Inventory Item</a>
 
 <h2>Manage Inventory</h2>
+<p>Select a classification to see its inventory.</p>
 
+<!-- Classification dropdown -->
+<%- classificationSelect %>
+
+<!-- JS-inserted inventory table (AJAX) -->
+<table id="inventoryDisplay"></table>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- Full inventory table -->
 <table>
   <tr>
     <th>Make</th>
@@ -23,14 +33,20 @@
     <th>Delete</th>
   </tr>
 
-  <% inventory.forEach(item => { %>
+  <% if (inventory && inventory.length > 0) { %>
+    <% inventory.forEach(item => { %>
+      <tr>
+        <td><%= item.inv_make %></td>
+        <td><%= item.inv_model %></td>
+        <td><%= item.inv_year %></td>
+        <td>$<%= new Intl.NumberFormat("en-US").format(item.inv_price) %></td>
+        <td><a href="/inv/edit/<%= item.inv_id %>">Edit</a></td>
+        <td><a href="/inv/delete/<%= item.inv_id %>">Delete</a></td>
+      </tr>
+    <% }) %>
+  <% } else { %>
     <tr>
-      <td><%= item.inv_make %></td>
-      <td><%= item.inv_model %></td>
-      <td><%= item.inv_year %></td>
-      <td>$<%= new Intl.NumberFormat("en-US").format(item.inv_price) %></td>
-      <td><a href="/inv/edit/<%= item.inv_id %>">Edit</a></td>
-      <td><a href="/inv/delete/<%= item.inv_id %>">Delete</a></td>
+      <td colspan="6">No inventory available.</td>
     </tr>
-  <% }) %>
+  <% } %>
 </table>

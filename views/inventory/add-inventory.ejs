@@ -11,36 +11,26 @@
 
   <main>
     <h1>Add New Inventory Item</h1>
+
+    <!-- Flash Messages -->
     <%- include('../partials/messages', { messages: messages }) %>
 
-<% if (errors && errors.length > 0) { %>
-  <ul class="form-errors">
-    <% errors.forEach(e => { %>
-      <li><%= e %></li>
-    <% }) %>
-  </ul>
-<% } %>
-
-
-    <% if (messages && messages.length > 0) { %>
-      <div class="notice">
-        <% messages.forEach(msg => { %>
-          <p><%= msg %></p>
-        <% }) %>
-      </div>
-    <% } %>
-
+    <!-- Validation Errors -->
     <% if (errors && errors.length > 0) { %>
-      <div class="notice">
-        <% errors.forEach(err => { %>
-          <p><%= err %></p>
+      <ul class="form-errors">
+        <% errors.forEach(e => { %>
+          <li><%= e %></li>
         <% }) %>
-      </div>
+      </ul>
     <% } %>
 
     <form action="/inv/add-inventory" method="POST">
+
+      <!-- Classification dropdown -->
       <label for="classification_id">Classification</label>
-      <%- classificationSelect %>
+      <select name="classification_id" id="classification_id" required>
+        <%= classificationList %>
+      </select>
 
       <label for="inv_make">Make</label>
       <input type="text" name="inv_make" id="inv_make" required value="<%= inv_make || '' %>">
@@ -58,7 +48,7 @@
       <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= inv_thumbnail || '/images/vehicles/no-image-tn.png' %>">
 
       <label for="inv_price">Price</label>
-      <input type="number" name="inv_price" id="inv_price" required value="<%= inv_price || '' %>">
+      <input type="number" step="0.01" name="inv_price" id="inv_price" required value="<%= inv_price || '' %>">
 
       <label for="inv_year">Year</label>
       <input type="number" name="inv_year" id="inv_year" required value="<%= inv_year || '' %>">
