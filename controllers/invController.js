@@ -267,10 +267,11 @@ invCont.editInventoryView = async function (req, res, next) {
 
 
 /* ***************************
- * Process Inventory Update
- *************************** */
+ *  Update Inventory Data
+ * ************************** */
 invCont.updateInventory = async function (req, res, next) {
   try {
+    let nav = await utilities.getNav()
     const {
       inv_id,
       inv_make,
@@ -282,10 +283,10 @@ invCont.updateInventory = async function (req, res, next) {
       inv_year,
       inv_miles,
       inv_color,
-      classification_id
+      classification_id,
     } = req.body
 
-    const result = await invModel.updateInventory(
+    const updateResult = await invModel.updateInventory(
       inv_id,
       inv_make,
       inv_model,
@@ -299,28 +300,37 @@ invCont.updateInventory = async function (req, res, next) {
       classification_id
     )
 
-    if (result) {
-      req.flash("notice", `${inv_make} ${inv_model} updated successfully.`)
+    if (updateResult) {
+      const itemName = updateResult.inv_make + " " + updateResult.inv_model
+      req.flash("notice", `The ${itemName} was successfully updated.`)
       return res.redirect("/inv/")
+    } else {
+      const classificationSelect = await utilities.buildClassificationList(classification_id)
+      const itemName = `${inv_make} ${inv_model}`
+      req.flash("notice", "Sorry, the update failed.")
+      return res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationList: classificationSelect,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+      })
     }
-
-    const nav = await utilities.getNav()
-    const classificationList = await utilities.buildClassificationList(classification_id)
-
-    req.flash("notice", "Update failed.")
-    res.status(501).render("inventory/edit-inventory", {
-      title: `Edit ${inv_make} ${inv_model}`,
-      nav,
-      classificationList,
-      errors: null,
-      messages: req.flash("notice"),
-      ...req.body
-    })
-
   } catch (error) {
     next(error)
   }
 }
+
 
 /* ***************************
  * Return Inventory by Classification as JSON
