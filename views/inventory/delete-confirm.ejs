@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+
+<header>
+  <%- nav %>
+</header>
+
+<main>
+  <h1><%= title %></h1>
+
+  <%- include('../partials/messages', { messages: messages }) %>
+
+  <p>Confirm Deletion - This action is permanent and cannot be undone.</p>
+
+  <form action="/inv/delete" method="POST">
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" readonly>
+
+    <label for="inv_model">Model</label>
+    <input type="text" id="inv_model" name="inv_model" value="<%= inv_model %>" readonly>
+
+    <label for="inv_year">Year</label>
+    <input type="text" id="inv_year" name="inv_year" value="<%= inv_year %>" readonly>
+
+    <label for="inv_price">Price</label>
+    <input type="text" id="inv_price" name="inv_price" value="$<%= new Intl.NumberFormat('en-US').format(inv_price) %>" readonly>
+
+    <!-- Hidden inventory id -->
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+    <button type="submit" class="danger">Delete</button>
+    <a href="/inv/" class="button">Cancel</a>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>
