@@ -4,6 +4,8 @@ const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
 const regValidate = require("../utilities/account-validation")
 const checkJWT = utilities.checkJWTToken
+const accountValidate = require("../utilities/account-validation")
+
 
 // ========================================
 // Account Management (protected route)
@@ -43,5 +45,23 @@ router.post(
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 )
+
+
+router.get("/update/:accountId", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccount))
+
+
+router.post("/update",
+  accountValidate.updateRules(),
+  accountValidate.checkUpdateData,
+  utilities.handleErrors(accountController.processAccountUpdate)
+)
+
+
+router.post("/update-password",
+  accountValidate.passwordRules(),
+  accountValidate.checkPasswordData,
+  utilities.handleErrors(accountController.processPasswordUpdate)
+)
+
 
 module.exports = router

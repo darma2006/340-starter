@@ -32,6 +32,13 @@ router.post(
   utilities.handleErrors(invController.processAddInventory)
 )
 
+// protect edit/delete routes too
+router.get("/edit/:invId", utilities.checkAdmin, utilities.handleErrors(invController.buildEditInventory))
+router.post("/update", utilities.checkAdmin, validate.inventoryRules(), validate.checkUpdateData, utilities.handleErrors(invController.updateInventory))
+
+router.get("/delete/:invId", utilities.checkAdmin, utilities.handleErrors(invController.buildDeleteView))
+router.post("/delete", utilities.checkAdmin, utilities.handleErrors(invController.deleteInventory))
+
 // Inventory management view
 router.get(
   "/",
