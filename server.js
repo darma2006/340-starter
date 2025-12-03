@@ -71,6 +71,10 @@ app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
 app.use(staticRoutes)
 
+const favoritesRoute = require("./routes/favoritesRoute")
+app.use("/account/favorites", favoritesRoute)
+
+
 /* ***********************
  * 404 Handler
  *************************/
